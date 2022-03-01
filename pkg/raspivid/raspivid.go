@@ -28,7 +28,7 @@ type Camera struct {
 func (c *Camera) getRaspividArgs() []string {
 	params := []string{
 		"-t", "0",
-		"-o", c.Protocol + "://127.0.0.1" + c.ListenPort,
+		"-o", "/home/pi/gst.h264",
 		"-w", strconv.Itoa(*c.Width),
 		"-h", strconv.Itoa(*c.Height),
 		"-rot", strconv.Itoa(*c.Rotation),
