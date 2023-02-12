@@ -69,7 +69,7 @@ func (rec *RecordingList) handleRecordingList(w http.ResponseWriter, r *http.Req
 	}
 
 	if limit > 0 {
-		for i := 1; i < limit; i++ {
+		for i := 1; i < limit+1; i++ {
 			limitedOut = append(limitedOut, fileList[i])
 			println(fileList[i])
 		}
