@@ -65,7 +65,8 @@ func (rec *RecordingList) handleRecordingList(w http.ResponseWriter, r *http.Req
 
 	limit, err := strconv.Atoi(r.URL.Query().Get("limit"))
 	if err != nil {
-		return
+		out, _ := json.Marshal(err)
+		w.Write(out)
 	}
 
 	if limit > 0 {
