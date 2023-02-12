@@ -70,7 +70,8 @@ func (rec *RecordingList) handleRecordingList(w http.ResponseWriter, r *http.Req
 
 	if limit > 0 {
 		for i := 1; i < limit+1; i++ {
-			limitedOut = append(limitedOut, fileList[i])
+			fileListLength := len(fileList)
+			limitedOut = append(limitedOut, fileList[fileListLength-i])
 			println(fileList[i])
 		}
 		out, _ := json.Marshal(limitedOut)
