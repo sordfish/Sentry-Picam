@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"time"
 
@@ -55,9 +56,32 @@ func getAllFiles(folder string) []string {
 }
 
 func (rec *RecordingList) handleRecordingList(w http.ResponseWriter, r *http.Request) {
-	out, _ := json.Marshal(getAllFiles(rec.Folder))
+
+	var limitedOut []string
+
+	fileList := getAllFiles(rec.Folder)
+
 	w.Header().Set("Content-Type", "application/json")
+
+	limit, err := strconv.Atoi(r.URL.Query().Get("limit"))
+	if err != nil {
+		return
+	}
+
+	if limit > 0 {
+		for i := 1; i < limit; i++ {
+			limitedOut = append(limitedOut, fileList[i])
+			println(fileList[i])
+		}
+		out, _ := json.Marshal(limitedOut)
+		w.Write(out)
+	} else {
+
+	}
+
+	out, _ := json.Marshal(fileList)
 	w.Write(out)
+
 }
 
 func (rec *RecordingList) handleDeleteRecording(w http.ResponseWriter, r *http.Request) {
