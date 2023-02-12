@@ -76,11 +76,9 @@ func (rec *RecordingList) handleRecordingList(w http.ResponseWriter, r *http.Req
 		out, _ := json.Marshal(limitedOut)
 		w.Write(out)
 	} else {
-
+		out, _ := json.Marshal(fileList)
+		w.Write(out)
 	}
-
-	out, _ := json.Marshal(fileList)
-	w.Write(out)
 
 }
 
